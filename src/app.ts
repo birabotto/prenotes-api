@@ -15,6 +15,9 @@ app.use("/v1/api/prenotes", prenoteRoutes);
 app.use("/v1/api/articles", articlesRoutes);
 app.use("/v1/api/charts", chartsRoutes);
 app.use("/delete", deleteRoutes);
+app.use("/", (req, res) => {
+  res.status(200).json({ ok: "ok" });
+});
 app.use(errorHandler);
 
 app.listen(5000, () => {
