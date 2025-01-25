@@ -8,7 +8,7 @@ import deleteRoutes from "./routes/deleteRoutes";
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://prenotes-api.up.railway.app"],
+  origin: ["http://localhost:3000", "https://prenotes-web.up.railway.app"],
 };
 
 app.use(cors(corsOptions));
