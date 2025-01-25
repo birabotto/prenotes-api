@@ -1,0 +1,9 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: prenotesdb
+    ports:
+      - "5432:5432"
