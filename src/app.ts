@@ -9,7 +9,14 @@ const app = express();
 
 const isDev = process.env.NODE_ENV === "development";
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // Permitir todas as origens
+    methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
+    allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
+    credentials: true, // Permitir envio de cookies
+  })
+);
 app.use(express.json());
 app.use("/v1/api/prenotes", prenoteRoutes);
 app.use("/v1/api/articles", articlesRoutes);
