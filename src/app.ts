@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import morgan from "morgan";
 import { errorHandler } from "./middlewares/errorHandler";
 import prenoteRoutes from "./routes/prenoteRoutes";
 import articlesRoutes from "./routes/articleRoutes";
@@ -7,8 +8,22 @@ import chartsRoutes from "./routes/chartsRoutes";
 import deleteRoutes from "./routes/deleteRoutes";
 const app = express();
 
+app.use(
+  morgan(function (tokens, req, res) {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms",
+    ].join(" ");
+  })
+);
+
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://prenotes-web.up.railway.app"],
+  origin: ["*"],
 };
 
 app.use(cors(corsOptions));
