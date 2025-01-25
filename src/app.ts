@@ -7,7 +7,15 @@ import chartsRoutes from "./routes/chartsRoutes";
 import deleteRoutes from "./routes/deleteRoutes";
 const app = express();
 
-app.use(cors());
+const isDev = process.env.NODE_ENV === "development";
+
+app.use(
+  cors({
+    origin: isDev
+      ? "http://localhost:3000"
+      : "https://prenotes-web.up.railway.app",
+  })
+);
 
 app.use(express.json());
 app.use("/v1/api/prenotes", prenoteRoutes);
