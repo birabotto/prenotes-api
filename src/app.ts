@@ -15,10 +15,10 @@ app.use(
       ? "http://localhost:3000"
       : "https://prenotes-web.up.railway.app",
     allowedHeaders: ["Content/Type"],
-    methods: ["*"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
-
+app.options("*", cors());
 app.use(express.json());
 app.use("/v1/api/prenotes", prenoteRoutes);
 app.use("/v1/api/articles", articlesRoutes);
