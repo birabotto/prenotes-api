@@ -14,6 +14,8 @@ app.use(
     origin: isDev
       ? "http://localhost:3000"
       : "https://prenotes-web.up.railway.app",
+    allowedHeaders: ["Content/Type"],
+    methods: ["*"],
   })
 );
 
