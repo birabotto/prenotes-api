@@ -23,7 +23,7 @@ app.use(
 );
 
 const corsOptions = {
-  origin: ["*"],
+  origin: "*",
 };
 
 app.use(cors(corsOptions));
@@ -37,6 +37,9 @@ app.use("/", (req, res) => {
 });
 app.use(errorHandler);
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+const port = 5000;
+const host = "0.0.0.0";
+
+app.listen(port, host, () => {
+  console.log(`Servidor rodando em http://${host}:${port}`);
 });

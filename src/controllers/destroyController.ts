@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
 import { successResponse, errorResponse } from "../shared/response";
 
-import { DestroyService } from "../services/destroyService";
+import {
+  DestroyService,
+  LastDepartamentBedService,
+} from "../services/destroyService";
 
 export const DestroyController = async (
   req: Request,
@@ -11,6 +14,19 @@ export const DestroyController = async (
   try {
     await DestroyService();
     successResponse(res, [], "Delete all");
+  } catch (error: any) {
+    next(error);
+  }
+};
+
+export const LastDepartamentBedController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const lastPrenote = await LastDepartamentBedService();
+    successResponse(res, lastPrenote, "Last prenote all");
   } catch (error: any) {
     next(error);
   }

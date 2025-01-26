@@ -6,7 +6,7 @@
     "start": "ts-node src/app.ts",
     "docker-up": "docker-compose up -d",
     "docker-down": "docker-compose down",
-    "dev": "nodemon --exec ts-node src/app.ts --host",
+    "dev": "nodemon --exec ts-node src/app.ts",
     "migrate-dev": "npx prisma migrate deploy",
     "migrate-prod": "railway run npx prisma migrate deploy",
     "prisma-seed-prod": "railway run node prisma/seed.ts",

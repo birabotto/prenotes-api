@@ -1,8 +1,12 @@
 import { Router } from "express";
-import { DestroyController } from "../controllers/destroyController";
+import {
+  DestroyController,
+  LastDepartamentBedController,
+} from "../controllers/destroyController";
 
 const router = Router();
 
 router.get("/", DestroyController);
+router.get("/last", LastDepartamentBedController);
 
 export default router;
