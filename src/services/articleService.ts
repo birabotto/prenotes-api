@@ -30,21 +30,17 @@ export const updateArticle = async (
   data: ParsedArticle,
   filePath: any
 ) => {
-  const articlePrenote = await prisma.article.findFirst({
-    where: {
-      id: Number(id),
-    },
-    select: {
-      prenoteId: true,
-    },
-  });
+  // const articlePrenote = await prisma.article.findFirst({
+  //   where: {
+  //     id: Number(id),
+  //   },
+  //   select: {
+  //     prenoteId: true,
+  //   },
+  // });
 
   let image_url = null;
-  if ((image_url = filePath && articlePrenote)) {
-    image_url = filePath
-      ? await uploadImageToCloudinary(filePath, articlePrenote.prenoteId)
-      : null;
-  }
+  if (filePath) image_url = filePath;
 
   await prisma.article.update({
     where: {

@@ -54,12 +54,13 @@ export const updaArticleController = async (
 
     const data = req.body;
 
-    const file = req.file || null;
+    const file = req.file;
+    const imageUrl = file ? file.path : null;
     if (!id) {
       return errorResponse(res, "Article ID is required", 400);
     }
 
-    await updateArticle(id, data, file);
+    await updateArticle(id, data, imageUrl);
     successResponse(res, [], "Article was updated");
   } catch (error: any) {
     next(error);
