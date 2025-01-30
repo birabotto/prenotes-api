@@ -6,7 +6,7 @@ import {
   updateArticle,
   findArticleByItem,
 } from "../services/articleService";
-
+import { uploadToCloudinary } from "../shared/cloudinaryService";
 export const findArticlesByPrenoteController = async (
   req: Request,
   res: Response,
@@ -55,12 +55,15 @@ export const updaArticleController = async (
     const data = req.body;
 
     const file = req.file;
-    const imageUrl = file ? file.path : null;
     if (!id) {
       return errorResponse(res, "Article ID is required", 400);
     }
-
-    await updateArticle(id, data, imageUrl);
+    let image_url = null;
+    if (file) {
+      // Envia o arquivo para o Cloudinary se um arquivo for enviado
+      image_url = await uploadToCloudinary(file.buffer, file.originalname);
+    }
+    await updateArticle(id, data, image_url);
     successResponse(res, [], "Article was updated");
   } catch (error: any) {
     next(error);

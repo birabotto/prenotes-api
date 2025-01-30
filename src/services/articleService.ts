@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-import { uploadImageToCloudinary } from "../shared/cloudinaryService";
+
 type ParsedArticle = {
   ms: boolean;
   bts: boolean;
@@ -28,7 +28,7 @@ export const findArticlesById = async (id: string) => {
 export const updateArticle = async (
   id: string,
   data: ParsedArticle,
-  filePath: any
+  imageUrl: string | null
 ) => {
   // const articlePrenote = await prisma.article.findFirst({
   //   where: {
@@ -38,9 +38,6 @@ export const updateArticle = async (
   //     prenoteId: true,
   //   },
   // });
-
-  let image_url = null;
-  if (filePath) image_url = filePath;
 
   await prisma.article.update({
     where: {
@@ -52,7 +49,7 @@ export const updateArticle = async (
       bts: String(data.bts) === "true",
       done: String(data.done) === "true",
       top_up: String(data.top_up) === "true",
-      image_url: image_url || data.image_url,
+      image_url: imageUrl || data.image_url,
     },
   });
 };

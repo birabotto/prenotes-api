@@ -1,7 +1,6 @@
 import { Router } from "express";
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 require("dotenv").config();
 
@@ -17,29 +16,7 @@ import {
   findArticlesByItemController,
 } from "../controllers/articleController";
 
-interface CloudinaryParams {
-  folder: string;
-  format:
-    | string
-    | ((req: Request, file: Express.Multer.File) => string | Promise<string>);
-  public_id:
-    | string
-    | ((req: Request, file: Express.Multer.File) => string | Promise<string>);
-}
-
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "prenotes",
-    format: "png",
-    public_id: (req: Request, file: Express.Multer.File) => {
-      const timestamp = Date.now();
-      const originalName = file.originalname.split(".").slice(0, -1).join(".");
-      return `${originalName}-${timestamp}`;
-    },
-  } as CloudinaryParams,
-});
-
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 const router = Router();
 
