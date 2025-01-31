@@ -36,6 +36,7 @@ model Article {
   image_url    String?  @default("")
   done         Boolean  @default(false)
   prenote      Prenote  @relation(fields: [prenoteId], references: [id])
+  status       String  @default("available ")
   prenoteId    Int
 }
 
