@@ -14,6 +14,9 @@ export const findArticlesByPrenote = async (prenote_id: string) => {
     where: {
       prenoteId: Number(prenote_id),
     },
+    orderBy: {
+      location: "asc",
+    },
   });
 };
 
@@ -30,15 +33,6 @@ export const updateArticle = async (
   data: ParsedArticle,
   imageUrl: string | null
 ) => {
-  // const articlePrenote = await prisma.article.findFirst({
-  //   where: {
-  //     id: Number(id),
-  //   },
-  //   select: {
-  //     prenoteId: true,
-  //   },
-  // });
-
   await prisma.article.update({
     where: {
       id: Number(id),
