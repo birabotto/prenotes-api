@@ -22,8 +22,8 @@ model Department {  // Corrigido de 'Departament' para 'Department'
 model Article {
   id           Int      @id @default(autoincrement())
   name         String
-  item         String   @default("")
-  location     String?
+  item         String   
+  location     String?  
   order_qty    Int      @default(0)
   assq         Int?     @default(0)
   mpq          Int      @default(0)
@@ -33,7 +33,7 @@ model Article {
   bts          Boolean  @default(false)
   top_up       Boolean  @default(false)
   notes        String?  @db.Text
-  image_url    String?  @default("")
+  image_url    String?  
   done         Boolean  @default(false)
   prenote      Prenote  @relation(fields: [prenoteId], references: [id])
   status       String  @default("available ")

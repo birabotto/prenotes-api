@@ -14,9 +14,14 @@ export const findArticlesByPrenote = async (prenote_id: string) => {
     where: {
       prenoteId: Number(prenote_id),
     },
-    orderBy: {
-      location: "asc",
-    },
+    orderBy: [
+      {
+        location: {
+          sort: "asc",
+          nulls: "last",
+        },
+      },
+    ],
   });
 };
 

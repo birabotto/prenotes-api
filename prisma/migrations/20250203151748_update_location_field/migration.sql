@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Article" ALTER COLUMN "item" DROP DEFAULT,
+ALTER COLUMN "image_url" DROP DEFAULT,
+ALTER COLUMN "location" DROP DEFAULT;

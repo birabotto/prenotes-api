@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
-
+import formatNumber from "../shared/formatNumber";
 type ParsedArticle = {
   name: string;
   item: string;
@@ -50,8 +50,8 @@ export const createPrenotes = async (parsedData: ParsedArticle[]) => {
         articles: {
           create: articles.map((item: ParsedArticle) => ({
             name: item.name,
-            item: String(item.item),
-            location: item.location,
+            item: String(formatNumber(item.item)),
+            location: item.location || null,
             order_qty: item.order_qty,
             assq: Number(item.assq),
             mpq: item.mpq,
