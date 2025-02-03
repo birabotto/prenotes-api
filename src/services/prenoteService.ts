@@ -92,16 +92,20 @@ export const findAllPrenotes = async () => {
 
   return prenotes.map((prenote) => {
     const doneCount = prenote.articles.filter((article) => article.done).length;
+    const totalArticles = prenote._count.articles;
+    const donePercentage =
+      totalArticles > 0 ? (doneCount / totalArticles) * 100 : 0;
+
     return {
       id: prenote.id,
       createdAt: prenote.date,
       departament: prenote.department.name,
-      totalArticles: prenote._count.articles,
+      totalArticles,
       doneCount,
+      donePercentage: donePercentage,
     };
   });
 };
-
 export const findArticlesByPrenote = async (prenote_id: string) => {
   return await prisma.article.findMany({
     where: {
