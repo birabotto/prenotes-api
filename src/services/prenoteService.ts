@@ -102,7 +102,7 @@ export const findAllPrenotes = async () => {
       departament: prenote.department.name,
       totalArticles,
       doneCount,
-      donePercentage: donePercentage,
+      donePercentage: Math.floor(donePercentage),
     };
   });
 };

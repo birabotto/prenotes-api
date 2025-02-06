@@ -12,19 +12,19 @@ const uploadToCloudinary = (fileBuffer: Buffer, fileName: string) => {
     cloudinary.uploader
       .upload_stream(
         {
-          public_id: fileName, // Nome do arquivo
-          folder: "prenotes", // Pasta onde será armazenado
-          resource_type: "auto", // Cloudinary detecta o tipo de arquivo automaticamente
+          public_id: fileName,
+          folder: "prenotes",
+          resource_type: "auto",
         },
         (error: any, result: any) => {
           if (error) {
-            reject(error); // Se houver erro, rejeita a Promise
+            reject(error);
           } else {
-            resolve(result.secure_url); // Retorna a URL segura após o upload
+            resolve(result.secure_url);
           }
         }
       )
-      .end(fileBuffer); // O buffer do arquivo é passado com .end(fileBuffer)
+      .end(fileBuffer);
   });
 };
 

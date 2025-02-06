@@ -10,11 +10,11 @@ import prenoteRoutes from "./routes/prenoteRoutes";
 import articlesRoutes from "./routes/articleRoutes";
 import chartsRoutes from "./routes/chartsRoutes";
 import deleteRoutes from "./routes/deleteRoutes";
-
+import authRoutes from "./routes/authRoutes";
 const app = express();
-const server = http.createServer(app); // Manter o servidor HTTP
+const server = http.createServer(app);
 
-// Configuração do socket.io para usar o servidor HTTP
+import { isAuthenticated } from "./middlewares/authenticateToken";
 const io = new Server(server, { cors: { origin: "*" } });
 
 app.use(
@@ -37,6 +37,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use("/v1/api/auth", authRoutes);
 app.use("/v1/api/prenotes", prenoteRoutes);
 app.use("/v1/api/articles", articlesRoutes);
 app.use("/v1/api/charts", chartsRoutes);
